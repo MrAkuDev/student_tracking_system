@@ -550,7 +550,7 @@ class _DriverRouteScreenState extends State<DriverRouteScreen> {
 
     return Scaffold(
       appBar: StsAppBar(
-        title: '¡Hola!',
+        title: 'Bienvenido',
         subtitle: route == null
             ? null
             : (route.name.isNotEmpty ? route.name : route.shortCode),

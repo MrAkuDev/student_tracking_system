@@ -101,7 +101,7 @@ class _CoordinatorHomeScreenState extends State<CoordinatorHomeScreen> {
 
     return Scaffold(
       appBar: StsAppBar(
-        title: '¡Hola!',
+        title: 'Bienvenido',
         subtitle: subtitle,
         showBack: true,
         showRoleSwitch: true,

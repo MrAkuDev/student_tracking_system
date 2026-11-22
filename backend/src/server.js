@@ -11,6 +11,7 @@ function createApp() {
   const app = express();
   app.use(cors());
   app.use(express.json({ limit: '5mb' }));
+  app.get('/', (req, res) => res.json({ ok: true, service: 'sts-backend' }));
   app.use('/api', routes);
   app.use(notFound);
   app.use(errorHandler);
@@ -18,11 +19,6 @@ function createApp() {
 }
 
 async function createServer({ mongoUri, port = 3000, host = '0.0.0.0', autoSeed = true } = {}) {
-  await connectDB(mongoUri);
-  if (autoSeed && (await isDatabaseEmpty())) {
-    const created = await seed();
-    console.log('[seed] BD vacía, datos iniciales cargados:', created);
-  }
   const app = createApp();
   const server = http.createServer(app);
   const io = initSockets(server);
@@ -31,6 +27,20 @@ async function createServer({ mongoUri, port = 3000, host = '0.0.0.0', autoSeed 
     server.listen(port, host, resolve);
   });
   const actualPort = server.address().port;
+  console.log(`[sts] Puerto ${actualPort} abierto en ${host}, conectando a MongoDB...`);
+
+  try {
+    await connectDB(mongoUri);
+    if (autoSeed && (await isDatabaseEmpty())) {
+      const created = await seed();
+      console.log('[seed] BD vacía, datos iniciales cargados:', created);
+    }
+  } catch (err) {
+    await new Promise((resolve) => io.close(() => resolve()));
+    if (server.listening) await new Promise((resolve) => server.close(() => resolve()));
+    throw err;
+  }
+
   const close = async () => {
     await new Promise((resolve) => io.close(() => resolve()));
     if (server.listening) await new Promise((resolve) => server.close(() => resolve()));

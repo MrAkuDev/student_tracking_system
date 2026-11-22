@@ -98,7 +98,7 @@ class _TutorCodeScreenState extends State<TutorCodeScreen> {
               ),
               const SizedBox(height: 24),
               const Text(
-                '¡Hola!!!',
+                'Bienvenido',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 32,

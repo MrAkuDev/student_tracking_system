@@ -75,7 +75,7 @@ class RoleSelectionScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               const Text(
-                '¡Hola!',
+                'Bienvenido',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 34,

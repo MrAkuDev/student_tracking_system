@@ -103,7 +103,7 @@ class _DriverCodeScreenState extends State<DriverCodeScreen> {
                 ),
                 const SizedBox(height: 24),
                 const Text(
-                  '¡Hola!!',
+                  'Bienvenido',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 32,
