@@ -28,7 +28,13 @@ docker compose up -d
 ### Opción B — MongoDB Atlas
 Cambia únicamente `MONGO_URI` en `backend/.env` por tu cadena `mongodb+srv://...`.
 
-### Iniciar el servidor Node.js
+### Opción C — Sin instalar MongoDB ni Docker (en memoria)
+```bash
+cd backend
+npm run start:memory      # Levanta MongoDB en memoria con seed demo
+```
+
+### Iniciar el servidor Node.js (con Docker o MongoDB Atlas)
 ```bash
 cd backend
 cp .env.example .env      # En Windows PowerShell: copy .env.example .env
@@ -41,6 +47,9 @@ npm start                 # Escucha en http://0.0.0.0:3000
   ```bash
   npm run seed
   ```
+- **Endpoints de administración de BD (también disponibles desde la app en Configurar servidor):**
+  - `POST /api/admin/reset-db` — Elimina rutas, alumnos e incidentes, conservando solo el coordinador (`admin`/`1234`) y la escuela base.
+  - `POST /api/admin/seed-demo` — Reinicia la BD y vuelve a cargar el dataset demo (`RUT-101`, `RUT-102`, `ALU-1001..ALU-1003`).
 - Para verificar todo el backend sin instalar MongoDB (usa `mongodb-memory-server` + 4 clientes Socket.IO):
   ```bash
   npm run test:smoke
@@ -58,15 +67,26 @@ flutter pub get
 flutter run
 ```
 
+### Generar APK instalable para teléfono Android
+```bash
+cd frontend
+flutter build apk --release
+```
+El archivo listo para instalar se genera en `frontend/build/app/outputs/flutter-apk/app-release.apk` (ya incluye todos los permisos necesarios: Internet, GPS, notificaciones, llamadas `tel:` y compartir códigos).
+
 > Si en tu máquina falta algún archivo del Gradle Wrapper, revisa [`frontend/README_ANDROID.md`](frontend/README_ANDROID.md).
 
-### Configurar URL del servidor en la app
+### Configurar URL del servidor y administrar la BD desde la app
 En la pantalla inicial (`¡Hola!`), toca el ícono de engranaje (arriba a la derecha):
 - **Nube (Render, por defecto):** `https://student-tracking-system-6pxx.onrender.com`
 - **Emulador Android (local):** `http://10.0.2.2:3000`
 - **Dispositivo físico en la misma red Wi-Fi:** `http://<IP-LOCAL-DE-TU-PC>:3000`
 
-Usa el botón **Probar conexión** antes de guardar. *(Nota: en el plan gratuito de Render la primera petición tras inactividad puede tardar ~30–50 s en despertar.)*
+Usa el botón **Probar conexión** (`GET /api/health`) antes de guardar. *(Nota: en el plan gratuito de Render la primera petición tras inactividad puede tardar ~30–50 s en despertar.)*
+
+En la misma pantalla, bajo **Base de datos (Pruebas y Demo)**, puedes ejecutar con confirmación:
+- **Cargar datos demo (Seed):** restaura las rutas y alumnos de ejemplo.
+- **Resetear base de datos:** deja la base de datos limpia (solo `admin` / `1234` y escuela base) para crear rutas desde cero.
 
 ---
 

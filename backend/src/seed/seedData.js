@@ -1,4 +1,4 @@
-const { Coordinator, SchoolConfig, Route, Student } = require('../models');
+const { Coordinator, SchoolConfig, Route, Student, IncidentReport } = require('../models');
 
 const SCHOOL = {
   name: 'Escuela Primaria STS',
@@ -110,7 +110,47 @@ async function isDatabaseEmpty() {
   return c + r + s === 0;
 }
 
-module.exports = { seed, isDatabaseEmpty };
+/**
+ * Limpia rutas, alumnos e incidentes dejando únicamente el coordinador
+ * por defecto (admin/1234) y la configuración base de la escuela.
+ */
+async function resetDatabase() {
+  const [delIncidents, delStudents, delRoutes] = await Promise.all([
+    IncidentReport.deleteMany({}),
+    Student.deleteMany({}),
+    Route.deleteMany({}),
+  ]);
+
+  let coordinator = await Coordinator.findOne({ username: 'admin' });
+  if (!coordinator) {
+    await Coordinator.create({
+      username: 'admin',
+      password: '1234',
+      name: 'Coordinadora Ana López',
+      phone: '+526141234567',
+    });
+  }
+  if (!(await SchoolConfig.findOne())) {
+    await SchoolConfig.create(SCHOOL);
+  }
+
+  return {
+    deleted: {
+      routes: delRoutes.deletedCount || 0,
+      students: delStudents.deletedCount || 0,
+      incidents: delIncidents.deletedCount || 0,
+    },
+  };
+}
+
+/** Reinicia la BD y vuelve a cargar el dataset demo completo. */
+async function resetAndSeedDemo() {
+  await resetDatabase();
+  const created = await seed();
+  return { created };
+}
+
+module.exports = { seed, isDatabaseEmpty, resetDatabase, resetAndSeedDemo };
 
 if (require.main === module) {
   require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '.env') });

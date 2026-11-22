@@ -147,7 +147,7 @@ class _TutorHomeScreenState extends State<TutorHomeScreen> {
           AppRoutes.tutorValidateData,
           arguments: const TutorFlowArgs(editMode: true),
         ),
-        child: const Icon(Icons.priority_high_rounded),
+        child: const Icon(Icons.manage_accounts_rounded),
       ),
       body: SafeArea(
         child: _initialLoading && student == null

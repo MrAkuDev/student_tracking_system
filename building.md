@@ -189,3 +189,8 @@ El agente de **Fundación** crea todo lo compartido (config, theme, models, serv
   - Actualizado `AppConfig.defaultServerUrl` a la URL de Render (conservando `AppConfig.emulatorServerUrl = 'http://10.0.2.2:3000'`).
   - Agregado chip rápido **Nube (Render)** en `ServerSettingsScreen` junto a **Emulador (10.0.2.2)** y **Localhost**.
   - Actualizado `README.md` con la URL por defecto en la nube y presets locales.
+
+- **2026-11-22 16:15 — Opciones de Reset y Seed Demo en Backend + Panel de Servidor:**
+  - **Backend:** nuevos endpoints `POST /api/admin/reset-db` (borra rutas, alumnos e incidentes conservando `admin`/`1234` y escuela base) y `POST /api/admin/seed-demo` (reinicia y recarga `RUT-101`, `RUT-102`, `ALU-1001..ALU-1003`).
+  - **Frontend:** `ApiService.resetDatabase()` y `ApiService.seedDemoDatabase()`; agregada sección **Base de datos (Pruebas y Demo)** en `ServerSettingsScreen` con diálogos de confirmación y limpieza de sesión activa tras reiniciar.
+  - **UI Tutor:** corregidos iconos flotantes (`manage_accounts_rounded` en `TutorHomeScreen` e `info_outline_rounded` en `TutorLiveTrackingScreen`).

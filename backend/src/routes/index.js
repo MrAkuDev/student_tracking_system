@@ -7,6 +7,8 @@ const router = express.Router();
 // Utilidad
 router.get('/health', a.health);
 router.get('/config/school', a.schoolConfig);
+router.post('/admin/reset-db', a.adminResetDb);
+router.post('/admin/seed-demo', a.adminSeedDemo);
 
 // Auth / acceso
 router.post('/coordinator/login', a.coordinatorLogin);

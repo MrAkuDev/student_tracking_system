@@ -5,6 +5,7 @@ const svc = require('../services/routeService');
 const emit = require('../sockets/emitters');
 const { IncidentReport } = require('../models');
 const { applyStudentPatch } = require('./coordinatorController');
+const { resetDatabase, resetAndSeedDemo } = require('../seed/seedData');
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const ciExact = (code) => new RegExp(`^${escapeRe(code)}$`, 'i');
@@ -172,6 +173,24 @@ const driverArrivedSchool = asyncHandler(async (req, res) => {
 const health = (req, res) => res.json({ ok: true });
 const schoolConfig = asyncHandler(async (req, res) => res.json(await svc.getSchool()));
 
+const adminResetDb = asyncHandler(async (req, res) => {
+  const result = await resetDatabase();
+  res.json({
+    ok: true,
+    message: 'Base de datos reiniciada. Solo se conservaron los datos de inicio de sesión (admin / 1234) y la escuela base.',
+    ...result,
+  });
+});
+
+const adminSeedDemo = asyncHandler(async (req, res) => {
+  const result = await resetAndSeedDemo();
+  res.json({
+    ok: true,
+    message: 'Seed demo cargado correctamente (RUT-101, RUT-102, ALU-1001..ALU-1003).',
+    ...result,
+  });
+});
+
 module.exports = {
   coordinatorLogin,
   tutorAccess,
@@ -187,4 +206,6 @@ module.exports = {
   driverArrivedSchool,
   health,
   schoolConfig,
+  adminResetDb,
+  adminSeedDemo,
 };

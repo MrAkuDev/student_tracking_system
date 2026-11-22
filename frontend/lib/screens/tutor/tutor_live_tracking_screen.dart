@@ -516,7 +516,7 @@ class _TutorLiveTrackingScreenState extends State<TutorLiveTrackingScreen> {
               heroTag: 'tutor_live_info_fab',
               tooltip: 'Detalles de la ruta',
               onPressed: _showRouteDetailsSheet,
-              child: const Icon(Icons.priority_high_rounded),
+              child: const Icon(Icons.info_outline_rounded),
             ),
       body: SafeArea(
         child: _loading

@@ -139,6 +139,35 @@ class ApiService {
   Future<SchoolInfo> getSchoolConfig() async =>
       SchoolInfo.fromJson(await _send('GET', '/api/config/school'));
 
+  /// `POST /api/admin/reset-db` — borra rutas, alumnos e incidentes, conservando
+  /// el coordinador por defecto (admin/1234) y la escuela base.
+  Future<String> resetDatabase({String? baseUrl}) async {
+    final data = await _send(
+      'POST',
+      '/api/admin/reset-db',
+      baseUrl: baseUrl,
+      timeout: const Duration(seconds: 45),
+    );
+    return asString(
+      asMap(data)['message'],
+      'Base de datos reiniciada correctamente.',
+    );
+  }
+
+  /// `POST /api/admin/seed-demo` — reinicia y carga el dataset demo.
+  Future<String> seedDemoDatabase({String? baseUrl}) async {
+    final data = await _send(
+      'POST',
+      '/api/admin/seed-demo',
+      baseUrl: baseUrl,
+      timeout: const Duration(seconds: 45),
+    );
+    return asString(
+      asMap(data)['message'],
+      'Seed demo cargado correctamente.',
+    );
+  }
+
   // ===================== Auth / acceso =====================
 
   /// `POST /api/coordinator/login`
