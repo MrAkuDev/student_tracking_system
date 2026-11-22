@@ -97,7 +97,7 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
             ),
             const SizedBox(height: 6),
             const Text(
-              'En emulador Android usa http://10.0.2.2:3000. En dispositivo físico usa la IP local de tu PC (ej. http://192.168.1.50:3000).',
+              'Por defecto la app usa el servidor en la nube (Render). Para pruebas locales en emulador Android usa http://10.0.2.2:3000 o la IP local de tu PC.',
               style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
             ),
             const SizedBox(height: 16),
@@ -116,9 +116,15 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
               runSpacing: 8,
               children: [
                 ActionChip(
-                  label: const Text('Emulador (10.0.2.2)'),
+                  avatar: const Icon(Icons.cloud_outlined, size: 16),
+                  label: const Text('Nube (Render)'),
                   onPressed: () =>
                       _urlCtrl.text = AppConfig.defaultServerUrl,
+                ),
+                ActionChip(
+                  label: const Text('Emulador (10.0.2.2)'),
+                  onPressed: () =>
+                      _urlCtrl.text = AppConfig.emulatorServerUrl,
                 ),
                 ActionChip(
                   label: const Text('Localhost'),

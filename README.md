@@ -62,10 +62,11 @@ flutter run
 
 ### Configurar URL del servidor en la app
 En la pantalla inicial (`¡Hola!`), toca el ícono de engranaje (arriba a la derecha):
-- **Emulador Android:** `http://10.0.2.2:3000` (valor por defecto)
+- **Nube (Render, por defecto):** `https://student-tracking-system-6pxx.onrender.com`
+- **Emulador Android (local):** `http://10.0.2.2:3000`
 - **Dispositivo físico en la misma red Wi-Fi:** `http://<IP-LOCAL-DE-TU-PC>:3000`
 
-Usa el botón **Probar conexión** antes de guardar.
+Usa el botón **Probar conexión** antes de guardar. *(Nota: en el plan gratuito de Render la primera petición tras inactividad puede tardar ~30–50 s en despertar.)*
 
 ---
 

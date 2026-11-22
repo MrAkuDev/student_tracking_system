@@ -183,3 +183,9 @@ El agente de **Fundación** crea todo lo compartido (config, theme, models, serv
     - Actualizado `StsAppBar` para mostrar siempre el ícono `←` cuando `showBack: true` (`Navigator.pop()` si hay historial, o confirmación para volver a selección de rol con `confirmAndLogout` si es raíz del rol).
     - Habilitado `showBack: true` en `CoordinatorHomeScreen`, `TutorHomeScreen`, `TutorLiveTrackingScreen` (vuelve a `TutorHomeScreen`), `DriverRouteScreen` y `DriverTripFinishedScreen` (vuelve a `DriverRouteScreen`).
     - Revalidado con `flutter analyze` (**0 errores**).
+
+- **2026-11-22 14:56 — Despliegue en Render y URL por defecto en Settings:**
+  - Backend desplegado en Render: `https://student-tracking-system-6pxx.onrender.com`.
+  - Actualizado `AppConfig.defaultServerUrl` a la URL de Render (conservando `AppConfig.emulatorServerUrl = 'http://10.0.2.2:3000'`).
+  - Agregado chip rápido **Nube (Render)** en `ServerSettingsScreen` junto a **Emulador (10.0.2.2)** y **Localhost**.
+  - Actualizado `README.md` con la URL por defecto en la nube y presets locales.

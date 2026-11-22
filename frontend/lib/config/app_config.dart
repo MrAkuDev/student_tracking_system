@@ -12,8 +12,12 @@ class AppConfig {
   static const String appSubtitle = 'Student Tracking System';
 
   // --- Servidor ---------------------------------------------------------
+  /// Backend desplegado en la nube (Render) por defecto.
+  static const String defaultServerUrl =
+      'https://student-tracking-system-6pxx.onrender.com';
+
   /// Emulador Android → host de la PC. En dispositivo físico usar la IP LAN.
-  static const String defaultServerUrl = 'http://10.0.2.2:3000';
+  static const String emulatorServerUrl = 'http://10.0.2.2:3000';
   static const String prefServerUrl = 'sts_server_url';
   static const String prefDemoMode = 'sts_demo_mode';
 
