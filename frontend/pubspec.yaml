@@ -1,0 +1,46 @@
+name: sts_app
+description: STS (Student Tracking System) - control y monitoreo en tiempo real de rutas de transporte escolar.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.6.0 <4.0.0'
+  flutter: '>=3.27.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # Estado
+  provider: ^6.1.2
+
+  # Red
+  http: ^1.2.2
+  socket_io_client: ^3.0.2
+
+  # Mapas (flutter_map >= 8.2 incluye cache de tiles en disco por defecto
+  # en NetworkTileProvider, sin paquetes extra).
+  flutter_map: ^8.2.0
+  latlong2: ^0.9.1
+
+  # GPS
+  geolocator: ^14.0.2
+
+  # Notificaciones locales (v19: desugaring requerido, ver README_ANDROID.md)
+  flutter_local_notifications: ^19.5.0
+  timezone: ^0.10.0
+
+  # Utilidades nativas
+  url_launcher: ^6.3.1
+  share_plus: ^10.1.4
+  shared_preferences: ^2.3.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
