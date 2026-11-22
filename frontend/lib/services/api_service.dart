@@ -33,7 +33,7 @@ class ApiService {
   final ServerConfigProvider _config;
   final http.Client _client;
 
-  static const Duration _timeout = Duration(seconds: 15);
+  static const Duration _timeout = Duration(seconds: 35);
 
   // ===================== Núcleo HTTP =====================
 
@@ -129,7 +129,7 @@ class ApiService {
       'GET',
       '/api/health',
       baseUrl: baseUrl,
-      timeout: const Duration(seconds: 6),
+      timeout: const Duration(seconds: 45),
     );
     if (data is Map && data['ok'] == true) return;
     throw const ApiException('El servidor respondió, pero no es un backend STS.');

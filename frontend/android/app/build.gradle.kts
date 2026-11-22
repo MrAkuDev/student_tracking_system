@@ -31,8 +31,10 @@ android {
 
     buildTypes {
         release {
-            // Prototipo: firmar con la llave debug para poder usar `flutter run --release`.
+            // Prototipo: firmar con la llave debug para instalar directo en teléfono.
             signingConfig = signingConfigs.getByName("debug")
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
 }
