@@ -128,7 +128,7 @@ class _TutorCodeScreenState extends State<TutorCodeScreen> {
                 },
                 decoration: const InputDecoration(
                   labelText: 'Código de alumno',
-                  hintText: 'Ej. ALU-1001 o UUID',
+                  hintText: 'Ej. ALU-1001 o código completo',
                   prefixIcon: Icon(Icons.qr_code_rounded),
                 ),
               ),

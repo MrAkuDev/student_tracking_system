@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/demo_mode_provider.dart';
 import '../theme/app_colors.dart';
+import 'demo_mode_helper.dart';
 import 'role_switch.dart';
 
 /// AppBar estándar de STS con botón opcional de Demo y menú discreto de
@@ -77,7 +78,7 @@ class StsAppBar extends StatelessWidget implements PreferredSizeWidget {
                 color: demo.enabled ? AppColors.primary : AppColors.textSecondary,
               ),
               label: Text(
-                'Demo',
+                demo.enabled ? 'Demo activo' : 'Demo',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
@@ -90,7 +91,7 @@ class StsAppBar extends StatelessWidget implements PreferredSizeWidget {
               side: BorderSide(
                 color: demo.enabled ? AppColors.primary : AppColors.border,
               ),
-              onPressed: () => demo.toggle(),
+              onPressed: () => toggleDemoMode(context),
             ),
           ),
         if (actions != null) ...actions!,

@@ -15,7 +15,7 @@ Future<void> shareCode(
     ..writeln(title)
     ..writeln('Código: $shortCode');
   if (uuid != null && uuid.isNotEmpty) {
-    buffer.writeln('UUID: $uuid');
+    buffer.writeln('Identificador: $uuid');
   }
   if (description != null && description.isNotEmpty) {
     buffer.writeln(description);

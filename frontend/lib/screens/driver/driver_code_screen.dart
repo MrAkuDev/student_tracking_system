@@ -130,7 +130,7 @@ class _DriverCodeScreenState extends State<DriverCodeScreen> {
                   onFieldSubmitted: (_) => _submit(),
                   decoration: const InputDecoration(
                     labelText: 'Código',
-                    hintText: 'Ej. RUT-101 o UUID de ruta',
+                    hintText: 'Ej. RUT-101 o código completo',
                     prefixIcon: Icon(Icons.qr_code_rounded),
                   ),
                   validator: (value) {

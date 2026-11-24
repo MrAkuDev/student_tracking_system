@@ -1,6 +1,7 @@
 import 'package:latlong2/latlong.dart';
 
 import 'driver_models.dart';
+import 'enums.dart';
 import 'json_utils.dart';
 import 'misc_models.dart';
 import 'route_model.dart';
@@ -118,10 +119,12 @@ class TutorLiveStop {
   final double lat;
   final double lng;
   final int stopOrder;
+  final PickupStatus status;
   const TutorLiveStop({
     required this.lat,
     required this.lng,
     required this.stopOrder,
+    this.status = PickupStatus.pending,
   });
 
   LatLng get latLng => LatLng(lat, lng);
@@ -132,6 +135,7 @@ class TutorLiveStop {
       lat: asDouble(m['lat']),
       lng: asDouble(m['lng']),
       stopOrder: asInt(m['stopOrder']),
+      status: PickupStatus.parse(asStringOrNull(m['status'])),
     );
   }
 }

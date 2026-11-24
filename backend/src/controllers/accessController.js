@@ -111,6 +111,9 @@ const tutorLive = asyncHandler(async (req, res) => {
       lat: s.pickupLocation.lat,
       lng: s.pickupLocation.lng,
       stopOrder: s.stopOrder,
+      // Solo el estatus de la parada (sin datos personales) para calcular
+      // paradas restantes y hora estimada en la app del tutor.
+      status: s.pickupStatus,
     })),
   });
 });

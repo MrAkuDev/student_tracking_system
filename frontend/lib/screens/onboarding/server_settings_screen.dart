@@ -87,10 +87,10 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
   Future<void> _resetDatabase() async {
     final ok = await showConfirmDialog(
       context,
-      title: 'Resetear base de datos',
+      title: 'Reiniciar base de datos',
       message:
           'Se eliminarán todas las rutas, alumnos e incidentes. Solo quedará el acceso de coordinador (admin / 1234) y la escuela base.\n\n¿Deseas continuar?',
-      confirmLabel: 'Sí, resetear',
+      confirmLabel: 'Sí, reiniciar',
       cancelLabel: 'Cancelar',
       isDanger: true,
     );
@@ -119,10 +119,10 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
   Future<void> _seedDemo() async {
     final ok = await showConfirmDialog(
       context,
-      title: 'Cargar datos demo (Seed)',
+      title: 'Cargar datos de prueba',
       message:
           'Se reiniciará la base de datos y se cargarán las rutas y alumnos de demostración (RUT-101, RUT-102, ALU-1001..ALU-1003).\n\n¿Deseas continuar?',
-      confirmLabel: 'Sí, cargar demo',
+      confirmLabel: 'Sí, cargar datos',
       cancelLabel: 'Cancelar',
     );
     if (!ok || !mounted) return;
@@ -186,7 +186,7 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
           padding: const EdgeInsets.all(24),
           children: [
             const Text(
-              'URL del Backend STS',
+              'Dirección del servidor STS',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
@@ -203,7 +203,7 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
               controller: _urlCtrl,
               keyboardType: TextInputType.url,
               decoration: const InputDecoration(
-                labelText: 'URL del servidor',
+                labelText: 'Dirección del servidor',
                 hintText: AppConfig.defaultServerUrl,
                 prefixIcon: Icon(Icons.dns_outlined),
               ),
@@ -225,7 +225,7 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
                       _urlCtrl.text = AppConfig.emulatorServerUrl,
                 ),
                 ActionChip(
-                  label: const Text('Localhost'),
+                  label: const Text('Servidor local'),
                   onPressed: () => _urlCtrl.text = 'http://localhost:3000',
                 ),
               ],
@@ -298,7 +298,7 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
             ),
             const SizedBox(height: 16),
             PrimaryButton(
-              label: 'Cargar datos demo (Seed)',
+              label: 'Cargar datos de prueba',
               icon: Icons.dataset_outlined,
               variant: PrimaryButtonVariant.outlined,
               loading: _seeding,
@@ -306,7 +306,7 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
             ),
             const SizedBox(height: 12),
             PrimaryButton(
-              label: 'Resetear base de datos',
+              label: 'Reiniciar base de datos',
               icon: Icons.delete_sweep_outlined,
               variant: PrimaryButtonVariant.danger,
               loading: _resetting,

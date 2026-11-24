@@ -5,6 +5,7 @@ import '../../config/app_config.dart';
 import '../../config/routes.dart';
 import '../../providers/demo_mode_provider.dart';
 import '../../theme/app_colors.dart';
+import '../../widgets/demo_mode_helper.dart';
 
 /// Pantalla inicial de selección de rol ("¡Hola!" / "Por favor escoge tu rol").
 class RoleSelectionScreen extends StatelessWidget {
@@ -27,7 +28,7 @@ class RoleSelectionScreen extends StatelessWidget {
                 color: demo.enabled ? AppColors.primary : AppColors.textSecondary,
               ),
               label: Text(
-                demo.enabled ? 'Demo ON' : 'Demo',
+                demo.enabled ? 'Demo activo' : 'Demo',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
@@ -40,7 +41,7 @@ class RoleSelectionScreen extends StatelessWidget {
               side: BorderSide(
                 color: demo.enabled ? AppColors.primary : AppColors.border,
               ),
-              onPressed: () => demo.toggle(),
+              onPressed: () => toggleDemoMode(context),
             ),
           ),
           IconButton(

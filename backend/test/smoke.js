@@ -227,7 +227,7 @@ async function main() {
       assert.deepStrictEqual(d.polyline, poly);
       const live = await ok('GET', `/api/tutor/students/${s2.id}/live`);
       assert.deepStrictEqual(live.stops.map((s) => s.stopOrder), [1, 2]);
-      assert.deepStrictEqual(Object.keys(live.stops[0]).sort(), ['lat', 'lng', 'stopOrder']);
+      assert.deepStrictEqual(Object.keys(live.stops[0]).sort(), ['lat', 'lng', 'status', 'stopOrder']);
     });
 
     let driverRoute;

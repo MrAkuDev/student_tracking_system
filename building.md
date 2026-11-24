@@ -92,7 +92,7 @@ Errores: `{ "error": "mensaje legible en español" }` con status 400/404/409/500
 - `PUT /api/tutor/students/:id/profile` `{tutor?:{...}, firstName?, lastName?, grade?, pickupLocation?:{lat,lng}}` → `Student` (si llega pickupLocation → `isSet=true`).
 - `PATCH /api/tutor/students/:id/schedule` `{day:'monday'|...|'friday', enabled:boolean}` → `Student`.
 - `POST /api/tutor/students/:id/today-confirmation` `{decision:'confirmed'|'rejected'}` → `Student`.
-- `GET /api/tutor/students/:id/live` → `{ route:Route, student:Student, stops:[{lat,lng,stopOrder}] }`.
+- `GET /api/tutor/students/:id/live` → `{ route:Route, student:Student, stops:[{lat,lng,stopOrder,status}] }`.
 
 ### Chofer (100 % sanitizado)
 - `GET /api/driver/routes/:routeId/stops` → `DriverRoute` (con `stops`).
@@ -194,3 +194,9 @@ El agente de **Fundación** crea todo lo compartido (config, theme, models, serv
   - **Backend:** nuevos endpoints `POST /api/admin/reset-db` (borra rutas, alumnos e incidentes conservando `admin`/`1234` y escuela base) y `POST /api/admin/seed-demo` (reinicia y recarga `RUT-101`, `RUT-102`, `ALU-1001..ALU-1003`).
   - **Frontend:** `ApiService.resetDatabase()` y `ApiService.seedDemoDatabase()`; agregada sección **Base de datos (Pruebas y Demo)** en `ServerSettingsScreen` con diálogos de confirmación y limpieza de sesión activa tras reiniciar.
   - **UI Tutor:** corregidos iconos flotantes (`manage_accounts_rounded` en `TutorHomeScreen` e `info_outline_rounded` en `TutorLiveTrackingScreen`).
+
+- **2026-11-23 17:50 — Mejoras en Seguimiento en Vivo del Tutor (ETA, paradas restantes y puntualidad):**
+  - **Backend:** `GET /api/tutor/students/:id/live` ahora expone `status` (`pickupStatus`) en cada parada de `stops` (sin datos personales) para calcular paradas restantes con precisión; actualizado `test/smoke.js`.
+  - **Frontend:**
+    - Nuevo `lib/services/eta_service.dart` (`EtaService`): calcula hora estimada de llegada usando OSRM (con fallback Haversine × 1.35 a 25 km/h) + 1 min por parada intermedia, y persiste una línea base por viaje (`pickup` / `school`) para determinar puntualidad (`A tiempo` vs `Con retraso` > 5 min, o en pausa/avería).
+    - `TutorLiveTrackingScreen`: agregada franja resumen en tiempo real bajo la barra de estatus (hora estimada de llegada, paradas restantes y chip de puntualidad) y actualizado el bottom sheet **Detalles del viaje** reemplazando *Ruta* y *Código de ruta* por *Puntualidad*, *Llegada estimada* y *Paradas*.
